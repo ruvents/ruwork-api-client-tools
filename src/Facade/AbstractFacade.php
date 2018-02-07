@@ -9,12 +9,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractFacade
 {
+    protected $apiClient;
+    protected $requestFactory;
+    protected $hydrator;
+    protected $optionsResolver;
     protected $options = [];
     protected $class;
-    private $apiClient;
-    private $requestFactory;
-    private $hydrator;
-    private $optionsResolver;
 
     public function __construct(
         ApiClientInterface $apiClient,
@@ -53,10 +53,7 @@ abstract class AbstractFacade
 
     public function getRawResult()
     {
-        $options = $this->optionsResolver->resolve($this->options);
-        $request = $this->requestFactory->createRequest($options);
-
-        return $this->apiClient->request($request);
+        return $this->apiClient->request($this->createRequest());
     }
 
     public function getResult()
@@ -66,6 +63,13 @@ abstract class AbstractFacade
         }
 
         return $this->hydrator->hydrate($this->getRawResult(), $this->class);
+    }
+
+    protected function createRequest()
+    {
+        $options = $this->optionsResolver->resolve($this->options);
+
+        return $this->requestFactory->createRequest($options);
     }
 
     /**

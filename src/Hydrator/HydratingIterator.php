@@ -2,14 +2,12 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-use Traversable;
-
 final class HydratingIterator extends \IteratorIterator
 {
     private $hydrator;
     private $class;
 
-    public function __construct(HydratorInterface $hydrator, Traversable $data, $class)
+    public function __construct(HydratorInterface $hydrator, \Traversable $data, $class)
     {
         $this->hydrator = $hydrator;
         $this->class = $class;

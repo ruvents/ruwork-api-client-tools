@@ -8,17 +8,17 @@ use Ruwork\ApiClientTools\Hydrator\HydratorInterface;
 
 abstract class AbstractEndpoint
 {
+    protected $apiClient;
     protected $requestBuilder;
-    protected $processor;
     protected $hydrator;
     protected $class;
 
     public function __construct(
-        ApiClientInterface $processor,
+        ApiClientInterface $apiClient,
         RequestBuilder $requestBuilder = null,
         HydratorInterface $hydrator = null
     ) {
-        $this->processor = $processor;
+        $this->apiClient = $apiClient;
         $this->requestBuilder = $requestBuilder ?: new RequestBuilder();
         $this->hydrator = $hydrator;
         $this->configure();
@@ -82,7 +82,7 @@ abstract class AbstractEndpoint
 
     public function getRawResult()
     {
-        return $this->processor->request($this->requestBuilder->build());
+        return $this->apiClient->request($this->requestBuilder->build());
     }
 
     public function getResult()

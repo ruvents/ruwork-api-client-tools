@@ -8,17 +8,17 @@ use Ruwork\ApiClientTools\Hydrator\HydratorInterface;
 
 final class EndpointFactory
 {
+    private $apiClient;
     private $requestBuilder;
-    private $processor;
     private $hydrator;
 
     public function __construct(
-        ApiClientInterface $processor,
+        ApiClientInterface $apiClient,
         RequestBuilder $requestBuilder = null,
         HydratorInterface $hydrator = null
     ) {
+        $this->apiClient = $apiClient;
         $this->requestBuilder = $requestBuilder ?: new RequestBuilder();
-        $this->processor = $processor;
         $this->hydrator = $hydrator;
     }
 
@@ -39,6 +39,6 @@ final class EndpointFactory
             throw new \UnexpectedValueException(sprintf('Endpoint class %s must extend %s.', $class, AbstractEndpoint::class));
         }
 
-        return new $class($this->processor, $this->requestBuilder, $this->hydrator);
+        return new $class($this->apiClient, $this->requestBuilder, $this->hydrator);
     }
 }

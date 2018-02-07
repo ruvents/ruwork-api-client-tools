@@ -2,9 +2,9 @@
 
 namespace Ruwork\ApiClientTools\Endpoint;
 
+use Ruwork\ApiClientTools\ApiClientInterface;
 use Ruwork\ApiClientTools\Http\RequestBuilder;
 use Ruwork\ApiClientTools\Hydrator\HydratorInterface;
-use Ruwork\ApiClientTools\RequestProcessor\RequestProcessorInterface;
 
 final class EndpointFactory
 {
@@ -13,7 +13,7 @@ final class EndpointFactory
     private $hydrator;
 
     public function __construct(
-        RequestProcessorInterface $processor,
+        ApiClientInterface $processor,
         RequestBuilder $requestBuilder = null,
         HydratorInterface $hydrator = null
     ) {

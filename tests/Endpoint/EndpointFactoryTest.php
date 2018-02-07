@@ -5,7 +5,7 @@ namespace Ruwork\ApiClientTools\Endpoint;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Ruwork\ApiClientTools\Fixtures\Endpoint\TestEndpoint;
-use Ruwork\ApiClientTools\RequestProcessor\RequestProcessor;
+use Ruwork\ApiClientTools\Fixtures\TestApiClient;
 use Ruwork\ApiClientTools\ResponseDecoder\JsonResponseDecoder;
 
 class EndpointFactoryTest extends TestCase
@@ -17,8 +17,8 @@ class EndpointFactoryTest extends TestCase
 
     protected function setUp()
     {
-        $processor = new RequestProcessor(new Client(), new JsonResponseDecoder());
-        $this->factory = new EndpointFactory($processor);
+        $apiClient = new TestApiClient(new Client(), new JsonResponseDecoder());
+        $this->factory = new EndpointFactory($apiClient);
     }
 
     public function testCreateTestEndpoint()

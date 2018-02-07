@@ -5,10 +5,11 @@ namespace Ruwork\ApiClientTools\Endpoint;
 use GuzzleHttp\Psr7\Response;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
+use Ruwork\ApiClientTools\ApiClientInterface;
 use Ruwork\ApiClientTools\Fixtures\Endpoint\TestEndpoint;
 use Ruwork\ApiClientTools\Fixtures\Hydrator\TestResult;
+use Ruwork\ApiClientTools\Fixtures\TestApiClient;
 use Ruwork\ApiClientTools\Hydrator\ResultHydrator;
-use Ruwork\ApiClientTools\RequestProcessor\RequestProcessor;
 use Ruwork\ApiClientTools\ResponseDecoder\JsonResponseDecoder;
 
 class EndpointTest extends TestCase
@@ -19,9 +20,9 @@ class EndpointTest extends TestCase
     private $httpClient;
 
     /**
-     * @var RequestProcessor
+     * @var ApiClientInterface
      */
-    private $processor;
+    private $apiClient;
 
     /**
      * @var TestEndpoint
@@ -31,8 +32,8 @@ class EndpointTest extends TestCase
     protected function setUp()
     {
         $this->httpClient = new Client();
-        $this->processor = new RequestProcessor($this->httpClient, new JsonResponseDecoder());
-        $factory = new EndpointFactory($this->processor, null, new ResultHydrator());
+        $this->apiClient = new TestApiClient($this->httpClient, new JsonResponseDecoder());
+        $factory = new EndpointFactory($this->apiClient, null, new ResultHydrator());
         $this->endpoint = $factory->create(TestEndpoint::class);
     }
 
@@ -133,7 +134,7 @@ class EndpointTest extends TestCase
      */
     public function testNoClassException()
     {
-        $factory = new EndpointFactory($this->processor);
+        $factory = new EndpointFactory($this->apiClient);
         $endpoint = $factory->create(TestEndpoint::class);
 
         $this->httpClient->addResponse(new Response(200, [], 'null'));

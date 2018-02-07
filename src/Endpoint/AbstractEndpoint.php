@@ -2,9 +2,9 @@
 
 namespace Ruwork\ApiClientTools\Endpoint;
 
+use Ruwork\ApiClientTools\ApiClientInterface;
 use Ruwork\ApiClientTools\Http\RequestBuilder;
 use Ruwork\ApiClientTools\Hydrator\HydratorInterface;
-use Ruwork\ApiClientTools\RequestProcessor\RequestProcessorInterface;
 
 abstract class AbstractEndpoint
 {
@@ -14,7 +14,7 @@ abstract class AbstractEndpoint
     protected $class;
 
     public function __construct(
-        RequestProcessorInterface $processor,
+        ApiClientInterface $processor,
         RequestBuilder $requestBuilder = null,
         HydratorInterface $hydrator = null
     ) {
@@ -82,7 +82,7 @@ abstract class AbstractEndpoint
 
     public function getRawResult()
     {
-        return $this->processor->process($this->requestBuilder->build());
+        return $this->processor->request($this->requestBuilder->build());
     }
 
     public function getResult()

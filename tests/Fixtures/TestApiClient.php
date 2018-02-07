@@ -1,12 +1,13 @@
 <?php
 
-namespace Ruwork\ApiClientTools\RequestProcessor;
+namespace Ruwork\ApiClientTools\Fixtures;
 
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
+use Ruwork\ApiClientTools\ApiClientInterface;
 use Ruwork\ApiClientTools\ResponseDecoder\ResponseDecoderInterface;
 
-final class RequestProcessor implements RequestProcessorInterface
+class TestApiClient implements ApiClientInterface
 {
     private $client;
     private $decoder;
@@ -20,10 +21,8 @@ final class RequestProcessor implements RequestProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(RequestInterface $request)
+    public function request(RequestInterface $request)
     {
-        $response = $this->client->sendRequest($request);
-
-        return $this->decoder->decode($response);
+        return $this->decoder->decode($this->client->sendRequest($request));
     }
 }

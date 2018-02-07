@@ -58,4 +58,9 @@ abstract class AbstractFacade
 
         return $this->hydrator->hydrate($this->getRawResult(), $this->class);
     }
+
+    /**
+     * @return void
+     */
+    abstract protected function configure();
 }

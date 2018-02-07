@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\ApiClientTools\Exception;
+namespace Ruwork\ApiClientTools\ResponseDecoder\Exception;
 
 final class JsonDecodeException extends \RuntimeException
 {

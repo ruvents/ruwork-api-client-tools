@@ -2,7 +2,7 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-final class ResultHydrator implements HydratorInterface
+final class DocBlockResultHydrator implements HydratorInterface
 {
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ final class ResultHydrator implements HydratorInterface
         }
 
         if ($data instanceof \Traversable) {
-            return new TraversableCache($this->generateResult($data, $class));
+            return new HydratingIterator($this, $data, $class);
         }
 
         throw new \UnexpectedValueException(
@@ -56,25 +56,12 @@ final class ResultHydrator implements HydratorInterface
     }
 
     /**
-     * @param \Traversable $data
-     * @param string       $class
-     *
-     * @return \Generator
-     */
-    private function generateResult(\Traversable $data, $class)
-    {
-        foreach ($data as $key => $value) {
-            yield $key => $this->hydrate($value, $class);
-        }
-    }
-
-    /**
      * @param array  $data
      * @param string $class
      *
      * @throws \UnexpectedValueException
      *
-     * @return AbstractResult
+     * @return AbstractDocBlockResult
      */
     private function createObject($data, $class)
     {
@@ -82,9 +69,9 @@ final class ResultHydrator implements HydratorInterface
             throw new \UnexpectedValueException(sprintf('Class %s does not exist.', $class));
         }
 
-        if (!is_subclass_of($class, AbstractResult::class)) {
+        if (!is_subclass_of($class, AbstractDocBlockResult::class)) {
             throw new \UnexpectedValueException(
-                sprintf('Result class %s must extend %s.', $class, AbstractResult::class)
+                sprintf('DocBlock result class %s must extend %s.', $class, AbstractDocBlockResult::class)
             );
         }
 

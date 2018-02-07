@@ -3,7 +3,7 @@
 namespace Ruwork\ApiClientTools\ResponseDecoder;
 
 use Psr\Http\Message\ResponseInterface;
-use Ruwork\ApiClientTools\Exception\JsonDecodeException;
+use Ruwork\ApiClientTools\ResponseDecoder\Exception\JsonDecodeException;
 
 class JsonResponseDecoder implements ResponseDecoderInterface
 {
@@ -26,7 +26,7 @@ class JsonResponseDecoder implements ResponseDecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function decode(ResponseInterface $response)
+    public function decodeResponse(ResponseInterface $response)
     {
         $string = (string) $response->getBody();
         $data = json_decode($string, $this->associative, $this->depth, $this->options);

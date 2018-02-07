@@ -2,7 +2,7 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-abstract class AbstractResult implements \IteratorAggregate
+abstract class AbstractDocBlockResult implements \IteratorAggregate
 {
     private $data;
 
@@ -41,7 +41,7 @@ abstract class AbstractResult implements \IteratorAggregate
      */
     public function __set($offset, $value)
     {
-        throw new \LogicException('Result is immutable.');
+        throw new \LogicException('This object is immutable.');
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class AbstractResult implements \IteratorAggregate
      */
     public function __unset($offset)
     {
-        throw new \LogicException('Result is immutable.');
+        throw new \LogicException('This object is immutable.');
     }
 
     /**

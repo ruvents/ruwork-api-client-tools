@@ -23,6 +23,6 @@ class TestApiClient implements ApiClientInterface
      */
     public function request(RequestInterface $request)
     {
-        return $this->decoder->decode($this->client->sendRequest($request));
+        return $this->decoder->decodeResponse($this->client->sendRequest($request));
     }
 }

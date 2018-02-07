@@ -1,30 +1,30 @@
 <?php
 
-namespace Ruwork\ApiClientTools\Endpoint;
+namespace Ruwork\ApiClientTools\Facade;
 
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
-use Ruwork\ApiClientTools\Fixtures\Endpoint\TestEndpoint;
+use Ruwork\ApiClientTools\Fixtures\Facade\TestFacade;
 use Ruwork\ApiClientTools\Fixtures\TestApiClient;
 use Ruwork\ApiClientTools\ResponseDecoder\JsonResponseDecoder;
 
-class EndpointFactoryTest extends TestCase
+class FacadeFactoryTest extends TestCase
 {
     /**
-     * @var EndpointFactory
+     * @var FacadeFactory
      */
     private $factory;
 
     protected function setUp()
     {
         $apiClient = new TestApiClient(new Client(), new JsonResponseDecoder());
-        $this->factory = new EndpointFactory($apiClient);
+        $this->factory = new FacadeFactory($apiClient);
     }
 
-    public function testCreateTestEndpoint()
+    public function testCreateTestFacade()
     {
-        $enpoint = $this->factory->create(TestEndpoint::class);
-        $this->assertInstanceOf(TestEndpoint::class, $enpoint);
+        $enpoint = $this->factory->create(TestFacade::class);
+        $this->assertInstanceOf(TestFacade::class, $enpoint);
     }
 
     /**
@@ -38,7 +38,7 @@ class EndpointFactoryTest extends TestCase
 
     /**
      * @expectedException \UnexpectedValueException
-     * @expectedExceptionMessage Endpoint class Ruwork\ApiClientTools\Endpoint\EndpointFactoryTest must extend Ruwork\ApiClientTools\Endpoint\AbstractEndpoint.
+     * @expectedExceptionMessage Facade class Ruwork\ApiClientTools\Facade\FacadeFactoryTest must extend Ruwork\ApiClientTools\Facade\AbstractFacade.
      */
     public function testInvalidClassException()
     {

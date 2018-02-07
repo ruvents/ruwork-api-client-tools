@@ -11,5 +11,5 @@ interface ResponseDecoderInterface
      *
      * @return mixed
      */
-    public function decode(ResponseInterface $response);
+    public function decodeResponse(ResponseInterface $response);
 }

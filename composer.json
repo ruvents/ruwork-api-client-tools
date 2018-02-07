@@ -1,0 +1,39 @@
+{
+    "name": "ruwork/api-client-tools",
+    "description": "Ruwork API Client Tools",
+    "type": "library",
+    "keywords": ["api-client", "psr7", "httplug"],
+    "license": "MIT",
+    "authors": [
+        {"name": "Valentin Udaltsov", "email": "udaltsov@ruvents.com"}
+    ],
+    "require": {
+        "php": "^5.5.9 || ^7.0",
+        "php-http/httplug": "^1.0",
+        "php-http/message": "^1.6"
+    },
+    "require-dev": {
+        "guzzlehttp/psr7": "^1.0",
+        "php-http/discovery": "^1.3",
+        "php-http/mock-client": "^1.1",
+        "symfony/phpunit-bridge": "^3.0 || ^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruwork\\ApiClientTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ruwork\\ApiClientTools\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

@@ -28,6 +28,15 @@ abstract class AbstractFacade
         $this->requestFactory->configureOptions($this->optionsResolver);
     }
 
+    public function __call($name, array $args)
+    {
+        if (count($args) < 1) {
+            throw new \BadMethodCallException(sprintf('Method %s::%s() requires one argument.', static::class, $name));
+        }
+
+        return $this->setValue($name, $args[0]);
+    }
+
     public function setData(array $data)
     {
         $this->options['data'] = $data;

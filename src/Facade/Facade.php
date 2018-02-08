@@ -9,7 +9,7 @@ use Ruwork\ApiClientTools\RequestFactory\RequestFactory;
 use Ruwork\ApiClientTools\RequestFactory\RequestFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class Facade implements FacadeInterface
+class Facade implements FacadeInterface
 {
     private $client;
     private $requestFactory;

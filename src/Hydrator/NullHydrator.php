@@ -2,7 +2,7 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-class NullHydrator implements HydratorInterface
+final class NullHydrator implements HydratorInterface
 {
     /**
      * {@inheritdoc}

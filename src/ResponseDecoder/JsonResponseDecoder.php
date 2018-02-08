@@ -5,7 +5,7 @@ namespace Ruwork\ApiClientTools\ResponseDecoder;
 use Psr\Http\Message\ResponseInterface;
 use Ruwork\ApiClientTools\ResponseDecoder\Exception\JsonDecodeException;
 
-class JsonResponseDecoder implements ResponseDecoderInterface
+final class JsonResponseDecoder implements ResponseDecoderInterface
 {
     private $associative;
     private $depth;

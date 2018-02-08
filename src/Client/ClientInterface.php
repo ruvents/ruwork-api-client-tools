@@ -1,10 +1,10 @@
 <?php
 
-namespace Ruwork\ApiClientTools;
+namespace Ruwork\ApiClientTools\Client;
 
 use Psr\Http\Message\RequestInterface;
 
-interface ApiClientInterface
+interface ClientInterface
 {
     /**
      * @param RequestInterface $request

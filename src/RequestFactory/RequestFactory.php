@@ -4,9 +4,10 @@ namespace Ruwork\ApiClientTools\RequestFactory;
 
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\RequestFactory as HttpRequestFactory;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RequestFactory implements RequestFactoryInterface
+final class RequestFactory implements RequestFactoryInterface
 {
     private $requestFactory;
 
@@ -33,7 +34,7 @@ class RequestFactory implements RequestFactoryInterface
             ->setAllowedTypes('endpoint', 'string')
             ->setAllowedTypes('headers', 'array')
             ->setAllowedTypes('data', 'array')
-            ->setNormalizer('method', function ($method) {
+            ->setNormalizer('method', function (Options $options, $method) {
                 return strtoupper($method);
             });
     }

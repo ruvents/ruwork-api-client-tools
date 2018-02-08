@@ -2,9 +2,10 @@
 
 namespace Ruwork\ApiClientTools\Fixtures\Facade;
 
-use Ruwork\ApiClientTools\Facade\AbstractFacade;
+use Ruwork\ApiClientTools\Facade\AbstractEndpoint;
+use Ruwork\ApiClientTools\Fixtures\Hydrator\TestDocBlockResult;
 
-class TestFacade extends AbstractFacade
+class TestEndpoint extends AbstractEndpoint
 {
     /**
      * {@inheritdoc}
@@ -14,5 +15,6 @@ class TestFacade extends AbstractFacade
         $this->options = [
             'endpoint' => '/test',
         ];
+        $this->class = TestDocBlockResult::class;
     }
 }

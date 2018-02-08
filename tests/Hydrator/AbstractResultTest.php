@@ -3,13 +3,13 @@
 namespace Ruwork\ApiClientTools\Result;
 
 use PHPUnit\Framework\TestCase;
-use Ruwork\ApiClientTools\Fixtures\Hydrator\TestDocBlockResult;
+use Ruwork\ApiClientTools\Fixtures\Hydrator\TestPhpDocResult;
 
 class AbstractResultTest extends TestCase
 {
     public function testMagicPropertyAccess()
     {
-        $result = new TestDocBlockResult(['Id' => 1, 'Name' => null]);
+        $result = new TestPhpDocResult(['Id' => 1, 'Name' => null]);
 
         $this->assertTrue($result->exists('Id'));
         $this->assertTrue(isset($result->Id));
@@ -27,7 +27,7 @@ class AbstractResultTest extends TestCase
     public function testIterator()
     {
         $data = ['Id' => 1, 'Name' => null];
-        $this->assertSame($data, iterator_to_array(new TestDocBlockResult($data)));
+        $this->assertSame($data, iterator_to_array(new TestPhpDocResult($data)));
     }
 
     /**
@@ -36,7 +36,7 @@ class AbstractResultTest extends TestCase
      */
     public function testMagicSetException()
     {
-        $result = new TestDocBlockResult([]);
+        $result = new TestPhpDocResult([]);
         $result->Id = 1;
     }
 
@@ -46,7 +46,7 @@ class AbstractResultTest extends TestCase
      */
     public function testMagicUnsetException()
     {
-        $result = new TestDocBlockResult([]);
+        $result = new TestPhpDocResult([]);
         unset($result->Id);
     }
 }

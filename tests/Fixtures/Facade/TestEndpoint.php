@@ -3,7 +3,7 @@
 namespace Ruwork\ApiClientTools\Fixtures\Facade;
 
 use Ruwork\ApiClientTools\Facade\AbstractEndpoint;
-use Ruwork\ApiClientTools\Fixtures\Hydrator\TestDocBlockResult;
+use Ruwork\ApiClientTools\Fixtures\Hydrator\TestPhpDocResult;
 
 class TestEndpoint extends AbstractEndpoint
 {
@@ -15,6 +15,6 @@ class TestEndpoint extends AbstractEndpoint
         $this->options = [
             'endpoint' => '/test',
         ];
-        $this->class = TestDocBlockResult::class;
+        $this->class = TestPhpDocResult::class;
     }
 }

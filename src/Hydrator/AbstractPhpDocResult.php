@@ -2,7 +2,7 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-abstract class AbstractDocBlockResult implements \IteratorAggregate
+abstract class AbstractPhpDocResult implements \IteratorAggregate
 {
     private $data;
 

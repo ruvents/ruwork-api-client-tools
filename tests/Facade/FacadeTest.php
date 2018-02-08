@@ -7,8 +7,8 @@ use Http\Mock\Client as HttpClient;
 use PHPUnit\Framework\TestCase;
 use Ruwork\ApiClientTools\Client\Client;
 use Ruwork\ApiClientTools\Fixtures\Facade\TestEndpoint;
-use Ruwork\ApiClientTools\Fixtures\Hydrator\TestDocBlockResult;
-use Ruwork\ApiClientTools\Hydrator\DocBlockResultHydrator;
+use Ruwork\ApiClientTools\Fixtures\Hydrator\TestPhpDocResult;
+use Ruwork\ApiClientTools\Hydrator\PhpDocResultHydrator;
 use Ruwork\ApiClientTools\RequestFactory\RequestFactory;
 use Ruwork\ApiClientTools\ResponseDecoder\JsonResponseDecoder;
 
@@ -28,7 +28,7 @@ class FacadeTest extends TestCase
     {
         $this->httpClient = new HttpClient();
         $client = new Client($this->httpClient, new JsonResponseDecoder());
-        $this->facade = new Facade($client, new RequestFactory(), new DocBlockResultHydrator());
+        $this->facade = new Facade($client, new RequestFactory(), new PhpDocResultHydrator());
     }
 
     public function testExecute()
@@ -51,11 +51,11 @@ class FacadeTest extends TestCase
 
         $result = $this->facade->execute([
             'endpoint' => '/test',
-        ], TestDocBlockResult::class);
+        ], TestPhpDocResult::class);
 
         $request = $this->httpClient->getLastRequest();
 
-        $this->assertInstanceOf(TestDocBlockResult::class, $result);
+        $this->assertInstanceOf(TestPhpDocResult::class, $result);
         $this->assertSame('/test', $request->getUri()->getPath());
     }
 

@@ -3,29 +3,29 @@
 namespace Ruwork\ApiClientTools\Result;
 
 use PHPUnit\Framework\TestCase;
-use Ruwork\ApiClientTools\Fixtures\Hydrator\TestDocBlockResult;
-use Ruwork\ApiClientTools\Hydrator\DocBlockResultHydrator;
+use Ruwork\ApiClientTools\Fixtures\Hydrator\TestPhpDocResult;
+use Ruwork\ApiClientTools\Hydrator\PhpDocResultHydrator;
 
-class DocBlockResultHydratorTest extends TestCase
+class PhpDocResultHydratorTest extends TestCase
 {
     /**
-     * @var DocBlockResultHydrator
+     * @var PhpDocResultHydrator
      */
     private $hydrator;
 
     protected function setUp()
     {
-        $this->hydrator = new DocBlockResultHydrator();
+        $this->hydrator = new PhpDocResultHydrator();
     }
 
     public function testHydrate()
     {
         $data = ['Id' => 1];
 
-        /** @var TestDocBlockResult $result */
-        $result = $this->hydrator->hydrate($data, TestDocBlockResult::class);
+        /** @var TestPhpDocResult $result */
+        $result = $this->hydrator->hydrate($data, TestPhpDocResult::class);
 
-        $this->assertInstanceOf(TestDocBlockResult::class, $result);
+        $this->assertInstanceOf(TestPhpDocResult::class, $result);
         $this->assertSame(1, $result->Id);
     }
 
@@ -43,8 +43,8 @@ class DocBlockResultHydratorTest extends TestCase
             ],
         ];
 
-        /** @var TestDocBlockResult[][] $result */
-        $result = $this->hydrator->hydrate($data, TestDocBlockResult::class.'[][]');
+        /** @var TestPhpDocResult[][] $result */
+        $result = $this->hydrator->hydrate($data, TestPhpDocResult::class.'[][]');
 
         $this->assertSameSize($data, $result);
         $this->assertSame(array_keys($data), array_keys($result));
@@ -68,26 +68,26 @@ class DocBlockResultHydratorTest extends TestCase
             [],
         ]);
 
-        $result = $this->hydrator->hydrate($data, TestDocBlockResult::class.'[]');
+        $result = $this->hydrator->hydrate($data, TestPhpDocResult::class.'[]');
 
-        $this->assertContainsOnlyInstancesOf(TestDocBlockResult::class, $result);
+        $this->assertContainsOnlyInstancesOf(TestPhpDocResult::class, $result);
     }
 
     public function testHydrateWithMap()
     {
         $collectionData = [[], []];
 
-        /** @var TestDocBlockResult $result */
-        $result = $this->hydrator->hydrate(['Collection' => $collectionData], TestDocBlockResult::class);
+        /** @var TestPhpDocResult $result */
+        $result = $this->hydrator->hydrate(['Collection' => $collectionData], TestPhpDocResult::class);
 
         $this->assertSameSize($collectionData, $result->Collection);
-        $this->assertContainsOnlyInstancesOf(TestDocBlockResult::class, $result->Collection);
+        $this->assertContainsOnlyInstancesOf(TestPhpDocResult::class, $result->Collection);
     }
 
     public function testHydrateFromNull()
     {
-        /** @var TestDocBlockResult $result */
-        $result = $this->hydrator->hydrate(null, TestDocBlockResult::class);
+        /** @var TestPhpDocResult $result */
+        $result = $this->hydrator->hydrate(null, TestPhpDocResult::class);
 
         $this->assertNull($result);
     }
@@ -103,7 +103,7 @@ class DocBlockResultHydratorTest extends TestCase
 
     /**
      * @expectedException \UnexpectedValueException
-     * @expectedExceptionMessage DocBlock result class PHPUnit\Framework\TestCase must extend Ruwork\ApiClientTools\Hydrator\AbstractDocBlockResult.
+     * @expectedExceptionMessage PHPDoc result class PHPUnit\Framework\TestCase must extend Ruwork\ApiClientTools\Hydrator\AbstractPhpDocResult.
      */
     public function testInvalidClass()
     {

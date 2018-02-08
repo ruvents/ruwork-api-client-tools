@@ -2,7 +2,7 @@
 
 namespace Ruwork\ApiClientTools\Hydrator;
 
-final class DocBlockResultHydrator implements HydratorInterface
+final class PhpDocResultHydrator implements HydratorInterface
 {
     /**
      * {@inheritdoc}
@@ -61,7 +61,7 @@ final class DocBlockResultHydrator implements HydratorInterface
      *
      * @throws \UnexpectedValueException
      *
-     * @return AbstractDocBlockResult
+     * @return AbstractPhpDocResult
      */
     private function createObject($data, $class)
     {
@@ -69,9 +69,9 @@ final class DocBlockResultHydrator implements HydratorInterface
             throw new \UnexpectedValueException(sprintf('Class %s does not exist.', $class));
         }
 
-        if (!is_subclass_of($class, AbstractDocBlockResult::class)) {
+        if (!is_subclass_of($class, AbstractPhpDocResult::class)) {
             throw new \UnexpectedValueException(
-                sprintf('DocBlock result class %s must extend %s.', $class, AbstractDocBlockResult::class)
+                sprintf('PHPDoc result class %s must extend %s.', $class, AbstractPhpDocResult::class)
             );
         }
 

@@ -6,7 +6,7 @@ use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 use Ruwork\ApiClientTools\ResponseDecoder\ResponseDecoderInterface;
 
-class Client implements ClientInterface
+final class Client implements ClientInterface
 {
     private $httpClient;
     private $responseDecoder;

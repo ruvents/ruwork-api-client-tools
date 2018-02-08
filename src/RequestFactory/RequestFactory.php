@@ -7,7 +7,7 @@ use Http\Message\RequestFactory as HttpRequestFactory;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RequestFactory implements RequestFactoryInterface
+final class RequestFactory implements RequestFactoryInterface
 {
     private $requestFactory;
 

@@ -53,6 +53,20 @@ class AbstractEndpointTest extends TestCase
         $this->assertSame('/test?a=1&b=1&c=3', (string) $request->getUri());
     }
 
+    public function testHydrateFalse()
+    {
+        $this->httpClient->addResponse(new Response(200, [], '[]'));
+
+        /** @var TestEndpoint $endpoint */
+        $endpoint = $this->facade->createEndpoint(TestEndpoint::class);
+
+        $result = $endpoint
+            ->setHydrate(false)
+            ->execute();
+
+        $this->assertSame([], $result);
+    }
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method Ruwork\ApiClientTools\Fixtures\Facade\TestEndpoint::a() requires one argument.

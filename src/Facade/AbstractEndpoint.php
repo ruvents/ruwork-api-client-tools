@@ -7,6 +7,7 @@ abstract class AbstractEndpoint implements EndpointInterface
     protected $options = [];
     protected $class;
     private $facade;
+    private $hydrate = true;
 
     public function __construct(FacadeInterface $facade)
     {
@@ -37,12 +38,19 @@ abstract class AbstractEndpoint implements EndpointInterface
         return $this;
     }
 
+    public function setHydrate($hydrate)
+    {
+        $this->hydrate = $hydrate;
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */
     public function execute()
     {
-        return $this->facade->execute($this->options, $this->class);
+        return $this->facade->execute($this->options, $this->hydrate ? $this->class : null);
     }
 
     /**
